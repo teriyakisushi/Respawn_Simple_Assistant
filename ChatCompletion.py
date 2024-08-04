@@ -3,6 +3,9 @@ import erniebot
 from loguru import logger
 from config import ernie_key, assistant_name
 
+if assistant_name == "":
+    assistant_name = "小小"
+
 toMsg = [
     {"role": "user", "content": f"你是一名名为{assistant_name}的助手，请完全承担起这个角色。只需要用简洁的段落回答。控制回复字数，但不能影响表达,当用户输入信息为空或者无意义时，回复end或者结束去结束对话。"},
     {"role": "assistant", "content": "明白了，我每次回答都会像聊天一样简洁"},
