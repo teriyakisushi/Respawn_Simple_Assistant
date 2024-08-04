@@ -1,0 +1,7 @@
+dashscope==1.20.1
+erniebot==0.5.0
+loguru==0.7.2
+numpy==1.23.5
+Requests==2.32.3
+sounddevice==0.4.6
+SpeechRecognition==3.10.4
