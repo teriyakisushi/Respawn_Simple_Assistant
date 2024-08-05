@@ -24,7 +24,7 @@ python main.py
 - `ernie-key`: ernie-bot的access Key，你可以在百度的 `AIStudio` 控制台找到
 - `dashscope-key`: 阿里Dashscope语音合成的key
 - `wake_word`: 唤醒词，用于唤醒智能助手
-  - 配置项为一个列表,为了确保能准确唤醒，建议添加一些谐音词
+  - 配置项为列表，建议填写一些谐音词以提高唤醒准确率
 - `assistant_name`: 智能助手的名字，建议与 `wake_word` 同步
   - 如果为空将使用`小小`
 
@@ -32,6 +32,8 @@ python main.py
 
 - 在树莓派上播放音频卡顿
   - 在`yuzusoft.py`添加 `sd.default.blocksize = 2048`，增加缓冲区大小
+- 运行后提示 "Permission Denied"，无权限写入日志文件
+  - 使用`sudo chown -R {username} .`  提权
 
 # TO DO
 - [ ] OpenAI (GPT) or any other LLM support
