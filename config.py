@@ -14,3 +14,5 @@ assistant_name = ''
 wake_word = [
     '小小'
 ]
+# 语音合成模型
+tts_model = ''

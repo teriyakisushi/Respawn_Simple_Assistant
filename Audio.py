@@ -10,26 +10,27 @@ from loguru import logger
 import speech_recognition as sr
 from dashscope.audio.tts import SpeechSynthesizer
 
-from config import dashscope_key, azure_key
+from config import dashscope_key, azure_key, tts_model
 
 dashscope.api_key = dashscope_key
 azure_key = azure_key
+
+if tts_model.replace(' ', '') == '':
+    tts_model = 'sambert-zhimiao-emo-v1'
 
 
 # 播放
 def play(filename, volume=0.5, samplerate=16000):
     sd.stop()
     _, ext = os.path.splitext(filename)
-    # 如果文件是WAV格式
     if ext.lower() == ".wav":
         with wave.open(filename, 'rb') as wf:
             samples = np.frombuffer(wf.readframes(wf.getnframes()), dtype=np.int16)
-    # 如果文件是raw PCM格式
     elif ext.lower() == ".raw":
         samples = np.fromfile(filename, dtype=np.int16)
         samplerate = 24000
     else:
-        raise ValueError("Unsupported file type!")
+        raise ValueError("不支持的音频格式")
     # 调整音量
     samples = (samples * volume).astype(np.int16)
     # 播放音频
@@ -69,7 +70,7 @@ def dashscope_tts(text):
         os.remove('Sounds/response.wav')
     try:
         result = SpeechSynthesizer.call(
-            model='sambert-zhimiao-emo-v1',
+            model=tts_model,
             text=text,
             sample_rate=16000,
             format='wav'

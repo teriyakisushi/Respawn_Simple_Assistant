@@ -54,3 +54,11 @@ class WakeWordListener:
 
     def resume_listening(self):
         self._listening_active.set()  # 恢复监听
+
+    def vosk_reco(self):
+        with open("Sounds/voice.wav", "rb") as f:
+            audio = f.read()
+        if self.rec.AcceptWaveform(audio):
+            res_text = self.rec.Result().replace(" ", "")
+            logger.info(f"Offline Recognition result: {res_text}")
+            return res_text
